@@ -23,7 +23,7 @@ topVehicle = document.getElementById(`topVehicle`),
 countdownTimeout, countdownInterval, rockInterval, rocks = [], stars = [],
 moveAnimation, backgroundShiftX = 0, backgroundShiftY = 0,
 countdown = document.getElementById(`countdown`),
-defaultCountdownText = countdown.textContent,
+defaultCountdownText = countdown.innerHTML,
 code = Math.random().toString(36).substring(8),
 chatText = document.getElementById(`chatText`),
 defaultChatText = chatText.textContent,
@@ -124,7 +124,8 @@ function updateStarbux(amount) {
         chatInput.onkeyup = function(e) {
             if (e.key == `Enter` && chatInput.value.replaceAll(` `, ``)) socket.emit(`chatText`, chatInput.value)
         }; countdownTimeout = setTimeout(() => {
-            countdown.style.fontSize = `${parseFloat(countdown.style.fontSize) + 50}px`
+            countdown.style.fontSize = `${parseFloat(countdown.style.fontSize) + 80}px`
+            countdown.style.borderRadius = `25%`
             countdown.textContent = 3
             countdownInterval = setInterval(() => {
                 countdown.textContent = Number(countdown.textContent) - 1
@@ -135,21 +136,25 @@ function updateStarbux(amount) {
                     ctx.resetTransform()
                     canvas.hidden = false
                     bottomVehicle.setAttribute(`data-x`, canvas.width / 2 - bottomVehicle.width / 2)
+                    bottomVehicle.setAttribute(`data-canvasX`, bottomVehicle.getAttribute(`data-x`))
                     bottomVehicle.setAttribute(`data-moveXSpeed`, 8)
                     bottomVehicle.setAttribute(`data-xSpeed`, 0)
                     bottomVehicle.setAttribute(`data-y`, canvas.height / 2 + bottomVehicle.height / 2)
+                    bottomVehicle.setAttribute(`data-canvasY`, bottomVehicle.getAttribute(`data-y`))
                     bottomVehicle.setAttribute(`data-moveYSpeed`, 8)
                     bottomVehicle.setAttribute(`data-ySpeed`, 0)
                     topVehicle.setAttribute(`data-x`, canvas.width / 2 - topVehicle.width / 2)
+                    topVehicle.setAttribute(`data-canvasX`, topVehicle.getAttribute(`data-x`))
                     topVehicle.setAttribute(`data-moveXSpeed`, 8)
                     topVehicle.setAttribute(`data-xSpeed`, 0)
                     topVehicle.setAttribute(`data-y`, canvas.height / 2 - topVehicle.height * 1.5)
+                    topVehicle.setAttribute(`data-canvasY`, topVehicle.getAttribute(`data-y`))
                     topVehicle.setAttribute(`data-moveYSpeed`, 8)
                     topVehicle.setAttribute(`data-ySpeed`, 0)
                     move()
                     if (bottomVehicle.src == currentVehicle.src) {
                         socket.emit(`earth`, Math.floor(Math.random() * ((backgroundWidth + backgroundX - 300) - (backgroundX + 300)) + (backgroundX + 300)), Math.floor(Math.random() * ((backgroundHeight + backgroundY - 300) - (backgroundY + 300)) + (backgroundY + 300)))
-                        for (var i = 0; i < 30; i++) {
+                        for (var i = 0; i < 20; i++) {
                             var starX = Math.floor(Math.random() * ((backgroundWidth + backgroundX - 300) - (backgroundX + 300)) + (backgroundX + 300))
                             var starY = Math.floor(Math.random() * ((backgroundHeight + backgroundY - 300) - (backgroundY + 300)) + (backgroundY + 300))
                             socket.emit(`star`, {image: `starcoin.png`, x: starX, y: starY, width: 50, height: 50})
@@ -161,7 +166,7 @@ function updateStarbux(amount) {
                     }
                 }
             }, 1000);
-        }, 4000)
+        }, 6000)
     }
 }); function buy(button) {
     if (parseFloat(localStorage.getItem(`Starbux`)) >= button.className) {
@@ -212,10 +217,10 @@ function updateStarbux(amount) {
     if (earthX != undefined) ctx.drawImage(earthImage, earthX, earthY, 300, 300)
     ctx.drawImage(bottomVehicle, bottomVehicle.getAttribute(`data-x`), bottomVehicle.getAttribute(`data-y`), bottomVehicle.width, bottomVehicle.height)
     ctx.drawImage(topVehicle, topVehicle.getAttribute(`data-x`), topVehicle.getAttribute(`data-y`), topVehicle.width, topVehicle.height)
-    if (parseFloat(topVehicle.getAttribute(`data-x`)) > earthX - 100 && parseFloat(topVehicle.getAttribute(`data-x`)) < earthX + 100
-    && parseFloat(topVehicle.getAttribute(`data-y`)) > earthY - 100 && parseFloat(topVehicle.getAttribute(`data-y`)) < earthY + 100) var hitVehicle = topVehicle
-    if (parseFloat(bottomVehicle.getAttribute(`data-x`)) > earthX - 100 && parseFloat(bottomVehicle.getAttribute(`data-x`)) < earthX + 100
-    && parseFloat(bottomVehicle.getAttribute(`data-y`)) > earthY - 100 && parseFloat(bottomVehicle.getAttribute(`data-y`)) < earthY + 100) var hitVehicle = bottomVehicle
+    if (parseFloat(topVehicle.getAttribute(`data-x`)) > earthX - 150 && parseFloat(topVehicle.getAttribute(`data-x`)) < earthX + 150
+    && parseFloat(topVehicle.getAttribute(`data-y`)) > earthY - 150 && parseFloat(topVehicle.getAttribute(`data-y`)) < earthY + 150) var hitVehicle = topVehicle
+    if (parseFloat(bottomVehicle.getAttribute(`data-x`)) > earthX - 150 && parseFloat(bottomVehicle.getAttribute(`data-x`)) < earthX + 150
+    && parseFloat(bottomVehicle.getAttribute(`data-y`)) > earthY - 150 && parseFloat(bottomVehicle.getAttribute(`data-y`)) < earthY + 150) var hitVehicle = bottomVehicle
     if (hitVehicle) {
         if (hitVehicle.src == currentVehicle.src) {
             socket.emit(`disconnected`, `You lost. Your opponent found Earth.`)
@@ -281,10 +286,10 @@ function updateStarbux(amount) {
     canvas.hidden = true, topVehicle.hidden = true
     chatText.hidden = true, chatInput.hidden = true
     chatText.textContent = defaultChatText, chatInput.value = ``, infoText.hidden = true
-    countdown.textContent = defaultCountdownText, currentVehicle.src = currentVehicle.src.replace(`copy`, ``)
+    countdown.innerHTML = defaultCountdownText, currentVehicle.src = currentVehicle.src.replace(`copy`, ``)
     bottomVehicle.src = currentVehicle.src, bottomVehicle.hidden = false
     rocks = [], backgroundShiftX = 0, backgroundShiftY = 0
-    countdown.hidden = true, raceSettings.hidden = false
+    countdown.hidden = true, raceSettings.hidden = false, countdown.style.borderRadius = ``
     countdown.style.fontSize = countdown.getAttribute(`data-defaultFontSize`)
     raceInvite.hidden = true, board.hidden = false
     if (message.includes(`lost`) || message.includes(`win`)) updateStarbux(parseFloat(localStorage.getItem(`Starbux`)) + (message.includes(`lost`) ? -1 : 1) * 200)
@@ -299,3 +304,21 @@ socket.on(`chatText`, text => chatText.textContent = text)
 socket.on(`invalidCode`, () => alert(`No player has that code.`))
 socket.on(`waitForInviteResponse`, () => alert(`Wait for the other player to respond to your invite.`))
 socket.on(`earth`, (x, y) => {earthX = x, earthY = y})
+canvas.ontouchstart = mobileMove
+canvas.ontouchmove = canvas.ontouchstart
+canvas.ontouchend = mobileMove
+canvas.ontouchcancel = canvas.ontouchend
+function mobileMove(e) {
+    var raceVehicle = bottomVehicle.src == currentVehicle.src ? bottomVehicle : topVehicle
+    if (e.touches.length > 0) {
+        e.preventDefault()
+        var touchX = e.touches[0].clientX - canvas.getBoundingClientRect().left,
+        touchY = e.touches[0].clientY - canvas.getBoundingClientRect().top
+        if (touchX < parseFloat(raceVehicle.getAttribute(`data-canvasX`)) + raceVehicle.width / 2) socket.emit(`moveVehicle`, raceVehicle.src, `data-xSpeed`, -raceVehicle.getAttribute(`data-moveXSpeed`))
+        if (touchX > parseFloat(raceVehicle.getAttribute(`data-canvasX`)) + raceVehicle.width / 2) socket.emit(`moveVehicle`, raceVehicle.src, `data-xSpeed`, raceVehicle.getAttribute(`data-moveXSpeed`))
+        if (touchY < parseFloat(raceVehicle.getAttribute(`data-canvasY`)) + raceVehicle.height / 2) socket.emit(`moveVehicle`, raceVehicle.src, `data-ySpeed`, -raceVehicle.getAttribute(`data-moveYSpeed`))
+        if (touchY > parseFloat(raceVehicle.getAttribute(`data-canvasY`)) + raceVehicle.height / 2) socket.emit(`moveVehicle`, raceVehicle.src, `data-ySpeed`, raceVehicle.getAttribute(`data-moveYSpeed`))
+    } else {socket.emit(`moveVehicle`, raceVehicle.src, `data-ySpeed`, 0)
+        socket.emit(`moveVehicle`, raceVehicle.src, `data-xSpeed`, 0)
+    }
+}
