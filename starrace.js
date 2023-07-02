@@ -1,4 +1,4 @@
-var socket = io.connect(`http://127.0.0.1:5500`),
+var socket = io.connect(`https://starrace.onrender.com`),
 canvas = document.querySelector(`canvas`),
 ctx = canvas.getContext(`2d`),
 board = document.getElementById(`board`),
