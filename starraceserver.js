@@ -40,6 +40,6 @@ io.on(`connection`, (socket) => {
             }
         }
     })
-}); server.listen(process.env.PORT || 5500, () => {
+}); server.listen(process.env.PORT || 5500, `127.0.0.1`, () => {
     console.log(`listening on 5500`)
 })

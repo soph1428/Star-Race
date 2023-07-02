@@ -1,4 +1,4 @@
-var socket = io.connect(`https://starrace.onrender.com`),
+var socket = io.connect(`http://127.0.0.1:5500`),
 canvas = document.querySelector(`canvas`),
 ctx = canvas.getContext(`2d`),
 board = document.getElementById(`board`),
@@ -44,6 +44,7 @@ socket.emit(`newUser`, code)
 bottomVehicle.src = currentVehicle.src
 var backgroundImage = new Image()
 backgroundImage.src = `starbackground.jpg`
+console.log(backgroundImage.width, backgroundImage.height)
 var backgroundX = -backgroundImage.width * 2,
 backgroundY = -backgroundImage.height * 2,
 backgroundWidth = backgroundImage.width * 5,
