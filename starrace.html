@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Race</title>
+    <link href="https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<style>
+    ::placeholder {color: black}
+    ::-ms-input-placeholder {color: black}
+</style>
+<body style="text-align: center; background-color: lightblue;">
+    <div id="board" style="margin: auto; width: 600px; height: 500px; background-image: url(starbackground.webp); background-size: cover; border: solid black 5px;">
+        <div id="vehicles" hidden>
+            <div id="options" style="overflow: auto; white-space: nowrap;"></div>
+            <img id="currentVehicle" width="150" height="150" src="vehicle1.png"><br>
+            <button onclick="reset()" style="background-color: #5885AF; font-size: 40px;">Exit</button>
+        </div> <div id="shopDiv" style="height: 80%; width: 80%; background-color: #5885AF; margin-left: 10%; margin-top: 8%;" hidden>
+            <label id="starbuxText" style="font-size: 30px;">Starbux: <i class="material-icons" style="font-size: 20px;">stars</i></label><br><br>
+            <div id="shopItems" style="overflow: auto; white-space: nowrap;"></div><br>
+            <button onclick="reset()" style="background-color: lightblue; font-size: 30px; margin-top: 25px;">Exit</button>
+        </div>
+        <div id="mainButtons">
+            <button id="vehicleButton" onclick="changeVehicle()" style="background-color: #5885AF; font-size: 30px;">Vehicles</button>
+            <button id="raceButton" onclick="race()" style="background-color: #5885AF; font-size: 30px;">Race</button>
+            <button id="shopButton" onclick="shop()" style="background-color: #5885AF; font-size: 30px;">Shop</button>
+        </div>
+        <div id="raceDiv" style="height: 100%;" hidden>
+            <img id="topVehicle" width="100" height="100" src="" hidden><br>
+            <label id="countdown" data-defaultFontSize="50px" style="background-color: #5885AF; font-size: 50px; border-radius: 25%;" hidden>Whoever finds Earth first wins!</label><br>
+            <img id="bottomVehicle" width="100" height="100" src=""><br>
+            <div id="raceSettings">
+                <label id="codeText" style="background-color: #5885AF; font-size: 30px;"></label>
+                <input id="codeInput" style="background-color: #5885AF; font-size: 30px; width: 45%;" placeholder="Enter other code..." onkeyup="submitCode(this.value.replaceAll(` `, ``), event)"><br><br>
+                <button onclick="reset()" style="background-color: #5885AF; font-size: 30px;">Exit</button>
+            </div>
+        </div>
+        <div id="raceInvite" style="height: 80%; width: 80%; background-color: #5885AF; margin-left: 10%; margin-top: 8%;" hidden>
+            <label style="font-size: 50px;">Someone wants to race with you!</label><br><br>
+            <button id="acceptRace" style="background-color: lightblue; font-size: 40px; margin: 5px;">Accept</button>
+            <button id="declineRace" style="background-color: lightblue; font-size: 40px; margin: 5px;">Decline</button>
+        </div>
+    </div>
+    <canvas width="600" height="500" style="margin: auto; border: solid black 5px; background-image: url(starbackground.jpg)" hidden></canvas><br>
+    <label id="infoText" style="background-color: #5885AF; font-size: 40px;" hidden>Watch out for rocks, they will slow you down. Collect stars to increase speed and gain <i class="material-icons" style="font-size: 30px;">stars</i>50! Use WASD or Arrow Keys to move around.</label><br><br>
+    <label id="chatText" style="background-color: #5885AF; font-size: 40px; border-radius: 25%;" hidden>Text will show here</label><br><br>
+    <input id="chatInput" style="background-color: #5885AF; font-size: 30px; width: 45%;" placeholder="Chat with opponent..." hidden>
+    <script src="/node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="starrace.js"></script>
+</body>
+</html>
