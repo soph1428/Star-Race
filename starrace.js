@@ -208,7 +208,6 @@ function updateStarbux(amount) {
     bottomVehicle.setAttribute(`data-y`, parseFloat(bottomVehicle.getAttribute(`data-y`)) + parseFloat(bottomVehicle.getAttribute(`data-ySpeed`)))
     topVehicle.setAttribute(`data-x`, parseFloat(topVehicle.getAttribute(`data-x`)) + parseFloat(topVehicle.getAttribute(`data-xSpeed`)))
     topVehicle.setAttribute(`data-y`, parseFloat(topVehicle.getAttribute(`data-y`)) + parseFloat(topVehicle.getAttribute(`data-ySpeed`)))
-    console.log(topVehicle.getAttribute(`data-x`), topVehicle.getAttribute(`data-y`), bottomVehicle.getAttribute(`data-x`), bottomVehicle.getAttribute(`data-y`), earthX, earthY)
     ctx.drawImage(backgroundImage, backgroundX, backgroundY, backgroundWidth, backgroundHeight)
     if (earthX != undefined) ctx.drawImage(earthImage, earthX, earthY, 300, 300)
     ctx.drawImage(bottomVehicle, bottomVehicle.getAttribute(`data-x`), bottomVehicle.getAttribute(`data-y`), bottomVehicle.width, bottomVehicle.height)
