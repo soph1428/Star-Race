@@ -234,8 +234,8 @@ function updateStarbux(amount) {
         ctx.drawImage(image, rock.x, rock.y, rock.width, rock.height)
         rock.x += rock.xSpeed
         rock.y += rock.ySpeed
-        if (rocks[i] == rock && ((rock.x > backgroundImage.width * 3 && Math.sign(rock.xSpeed) == 1) || (rock.x + rock.width < -backgroundImage.width && Math.sign(rock.xSpeed) == -1)
-        || (rock.y > backgroundImage.height * 3 && Math.sign(rock.ySpeed) == 1) || (rock.y + rock.height < -backgroundImage.height && Math.sign(rock.ySpeed) == -1))) rocks.splice(i, 1)
+        if (rocks[i] == rock && ((rock.x > backgroundWidth + backgroundX && Math.sign(rock.xSpeed) == 1) || (rock.x + rock.width < backgroundX && Math.sign(rock.xSpeed) == -1)
+        || (rock.y > backgroundHeight + backgroundY && Math.sign(rock.ySpeed) == 1) || (rock.y + rock.height < backgroundY && Math.sign(rock.ySpeed) == -1))) rocks.splice(i, 1)
         if (parseFloat(topVehicle.getAttribute(`data-x`)) + topVehicle.width > rock.x && parseFloat(topVehicle.getAttribute(`data-x`)) < rock.x + rock.width
         && parseFloat(topVehicle.getAttribute(`data-y`)) + topVehicle.height > rock.y && parseFloat(topVehicle.getAttribute(`data-y`)) < rock.y + rock.height) var hitVehicleRock = topVehicle
         if (parseFloat(bottomVehicle.getAttribute(`data-x`)) + bottomVehicle.width > rock.x && parseFloat(bottomVehicle.getAttribute(`data-x`)) < rock.x + rock.width
