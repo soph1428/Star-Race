@@ -316,10 +316,10 @@ function mobileMove(e) {
         e.preventDefault()
         var touchX = e.touches[0].clientX - canvas.getBoundingClientRect().left,
         touchY = e.touches[0].clientY - canvas.getBoundingClientRect().top
-        if (touchX < parseFloat(raceVehicle.getAttribute(`data-canvasX`)) + raceVehicle.width / 2) socket.emit(`moveVehicle`, raceVehicle.src, `data-xSpeed`, -raceVehicle.getAttribute(`data-moveXSpeed`))
-        if (touchX > parseFloat(raceVehicle.getAttribute(`data-canvasX`)) + raceVehicle.width / 2) socket.emit(`moveVehicle`, raceVehicle.src, `data-xSpeed`, raceVehicle.getAttribute(`data-moveXSpeed`))
-        if (touchY < parseFloat(raceVehicle.getAttribute(`data-canvasY`)) + raceVehicle.height / 2) socket.emit(`moveVehicle`, raceVehicle.src, `data-ySpeed`, -raceVehicle.getAttribute(`data-moveYSpeed`))
-        if (touchY > parseFloat(raceVehicle.getAttribute(`data-canvasY`)) + raceVehicle.height / 2) socket.emit(`moveVehicle`, raceVehicle.src, `data-ySpeed`, raceVehicle.getAttribute(`data-moveYSpeed`))
+        if (touchX < parseFloat(raceVehicle.getAttribute(`data-canvasX`))) socket.emit(`moveVehicle`, raceVehicle.src, `data-xSpeed`, -raceVehicle.getAttribute(`data-moveXSpeed`))
+        if (touchX > parseFloat(raceVehicle.getAttribute(`data-canvasX`)) + raceVehicle.width) socket.emit(`moveVehicle`, raceVehicle.src, `data-xSpeed`, raceVehicle.getAttribute(`data-moveXSpeed`))
+        if (touchY < parseFloat(raceVehicle.getAttribute(`data-canvasY`))) socket.emit(`moveVehicle`, raceVehicle.src, `data-ySpeed`, -raceVehicle.getAttribute(`data-moveYSpeed`))
+        if (touchY > parseFloat(raceVehicle.getAttribute(`data-canvasY`)) + raceVehicle.height) socket.emit(`moveVehicle`, raceVehicle.src, `data-ySpeed`, raceVehicle.getAttribute(`data-moveYSpeed`))
     } else {socket.emit(`moveVehicle`, raceVehicle.src, `data-ySpeed`, 0)
         socket.emit(`moveVehicle`, raceVehicle.src, `data-xSpeed`, 0)
     }
