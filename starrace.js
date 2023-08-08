@@ -35,8 +35,8 @@ shopItems.forEach(item => {
     document.getElementById(`shopItems`).innerHTML += `
     <div id="${item.src.replace(`.png`, ``)}Item" style="width: 40%; display: inline-block;">
         <img src="${item.src}" width="100" height="100"><br>
-        <label style="font-size: 30px;"><i class="material-icons" style="font-size: 20px;">stars</i>${item.price}</label><br>
-        <button class="${item.price}" style="background-color: lightblue; font-size: 30px;" onclick="buy(this)">Buy</button>
+        <label style="font-size: 40px;"><i class="material-icons" style="font-size: 30px;">stars</i>${item.price}</label><br>
+        <button class="${item.price}" style="background-color: lightblue; font-size: 40px;" onclick="buy(this)">Buy</button>
     </div>`
 }); Array.from(document.querySelectorAll(`*`)).filter(elem => elem.tagName == `BUTTON` || elem.tagName == `LABEL` || elem.tagName == `INPUT`).forEach(elem => elem.style.fontFamily = `Monomaniac One`)
 document.getElementById(`codeText`).textContent = `Your code: ${code}`
