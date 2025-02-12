@@ -14,7 +14,7 @@
     ::-ms-input-placeholder {color: black}
 </style>
 <body style="text-align: center; background-color: lightblue;">
-    <div id="board" style="margin: auto; width: 600px; height: 500px; background-image: url(starbackground.webp); background-size: cover; border: solid black 5px;">
+    <div id="board" style="margin: auto; width: 600px; height: 500px; background-image: url(starbackground.webp); background-size: cover; background-repeat:repeat; border: solid black 5px;" hidden>
         <div id="vehicles" hidden>
             <div id="options" style="overflow: auto; white-space: nowrap;"></div><br>
             <img id="currentVehicle" width="150" height="150" src="vehicle1.png"><br><br><br>
@@ -35,7 +35,7 @@
             <img id="bottomVehicle" width="100" height="100" src="" style="margin: 3%">
             <div id="raceSettings">
                 <label id="codeText" style="background-color: #5885AF; font-size: 50px;"></label><br><br><br>
-                <input id="codeInput" style="background-color: #5885AF; font-size: 50px; width: 61%;" placeholder="Enter other code..." onkeyup="submitCode(this.value.replaceAll(` `, ``), event)"><br><br><br>
+                <input id="codeInput" style="background-color: #5885AF; font-size: 35px; width: 95%;" placeholder="Enter other player's code and press enter" onkeyup="submitCode(this.value.replaceAll(` `, ``), event)"><br><br><br>
                 <button onclick="reset()" style="background-color: #5885AF; font-size: 60px;">Exit</button>
             </div>
         </div>
@@ -46,7 +46,7 @@
         </div>
     </div>
     <canvas width="600" height="500" style="margin: auto; border: solid black 5px; background-image: url(starbackground.jpg);" hidden></canvas><br>
-    <label id="infoText" style="background-color: #5885AF; font-size: 40px;" hidden>Watch out for rocks, they will slow you down. Collect stars to increase speed and gain <i class="material-icons" style="font-size: 30px;">stars</i>50! Use WASD, Arrow Keys, or for mobile, drag to move around.</label><br><br>
+    <label id="infoText" style="background-color: #5885AF; font-size: 40px;" hidden>Watch out for rocks, they will slow you down and you will lose <i class="material-icons" style="font-size: 30px;">stars</i>5. Collect stars to increase speed and gain <i class="material-icons" style="font-size: 30px;">stars</i>5! Use W, A, S, D, arrow keys, or for mobile, drag to move around.</label><br><br>
     <label id="chatText" style="background-color: #5885AF; font-size: 40px; border-radius: 25%;" hidden>Text will show here</label><br><br>
     <input id="chatInput" style="background-color: #5885AF; font-size: 30px; width: 45%;" placeholder="Chat with opponent..." hidden>
     <script src="/node_modules/socket.io/client-dist/socket.io.js"></script>
